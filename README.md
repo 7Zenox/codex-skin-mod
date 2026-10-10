@@ -50,3 +50,7 @@ claude --plugin-dir /path/to/codex-skin-mod
 - Wide characters (CJK, emoji) can make a justified line slightly off.
 - The theme sets the session-color-independent rule colors. If the prompt rules are orange, clear the session color with `/color default`.
 - Constants live at the top of `hooks/register.tsx` (`ACCENT`, `DIM`, `USER_BG`, `MAX_OUTPUT_LINES`, `MAX_GAP`).
+
+## License
+
+[MIT](LICENSE). Not affiliated with or endorsed by OpenAI or Anthropic.
