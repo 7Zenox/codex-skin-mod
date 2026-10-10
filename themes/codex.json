@@ -1,0 +1,27 @@
+{
+  "name": "Codex",
+  "base": "dark",
+  "overrides": {
+    "claude": "#63A8F8",
+    "claudeShimmer": "#A4CDFB",
+    "briefLabelClaude": "#63A8F8",
+    "text": "#C1C1C1",
+    "inactive": "#7A7A7A",
+    "inactiveShimmer": "#A0A0A0",
+    "subtle": "#3A3A3A",
+    "suggestion": "#63A8F8",
+    "permission": "#63A8F8",
+    "permissionShimmer": "#A4CDFB",
+    "promptBorder": "#2A2A2A",
+    "promptBorderShimmer": "#2A2A2A",
+    "bashBorder": "#2A2A2A",
+    "warning": "#C4A767",
+    "success": "#7BC47F",
+    "error": "#E07A7A",
+    "userMessageBackground": "#2A2A2A",
+    "diffAdded": "#1F3A24",
+    "diffRemoved": "#4A1F22",
+    "autoAccept": "#2A2A2A",
+    "autoAcceptShimmer": "#2A2A2A"
+  }
+}

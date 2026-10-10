@@ -1,0 +1,6 @@
+{
+  "name": "codex-skin",
+  "version": "0.2.0",
+  "description": "Makes Claude Code look like the Codex TUI: codex-style tool rows, justified replies, block spacing, footer, and a matching Codex color theme.",
+  "author": { "name": "vasu7400" }
+}

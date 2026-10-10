@@ -1,0 +1,14 @@
+{
+  "name": "codex-skin-mod",
+  "owner": {
+    "name": "vasu7400"
+  },
+  "plugins": [
+    {
+      "name": "codex-skin",
+      "source": "./",
+      "description": "Codex-style TUI skin for Claude Code: tool rows, justified replies, spacing, footer, and a Codex theme."
+    }
+  ],
+  "description": "Codex-style TUI skin for Claude Code."
+}
