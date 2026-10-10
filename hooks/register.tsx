@@ -72,7 +72,7 @@ async function drawTool($: EngineInterface, e: any): Promise<JSX.Element | null>
 
   if (p.tool === 'Bash') {
     const cmd = String(input.command ?? '').split('\n')[0] ?? ''
-    if (p.isRunning) return header('Running', cmd)
+    if (p.isRunning || (!output && !p.isInterrupted)) return header('Running', cmd)
     if (p.isInterrupted) return <Box flexDirection="column">{header('Ran', cmd)}{branch(['Interrupted'])}</Box>
     const text = `${output?.stdout ?? ''}${output?.stderr ? `\n${output.stderr}` : ''}`.trimEnd()
     const all = text ? text.split('\n') : []
@@ -296,15 +296,19 @@ export const register: Register = on => {
     if (!footer) return next(e)
     const { Box, Text } = $.ui.resolve(e)
     const cols = e.viewport?.columns ?? 100
-    // Engine draws the mode pill ("▸▸ auto mode on", ~17 cells) to the left of this tree;
-    // one row: model · cwd on the left, the key hints pushed to the right edge.
+    // The engine draws the mode pill to the left of this row. Its label varies in width
+    // ("▸▸ auto mode on" ~17 cells, "⏵⏵ bypass permissions on" ~27), so reserve the widest.
+    const room = Math.max(30, cols - 36)
     // The engine's own hint varies ("(shift+tab to cycle)", "(shift+tab to cycle) · ← for agents",
     // "? for shortcuts"…); split it, drop the parens, dedupe, and make sure the two codex hints are there.
     const parts = e.props.hint.replace(/[()]/g, '').split(/\s*·\s*/).map(x => x.trim()).filter(Boolean)
     for (const extra of ['← for agents', '? for shortcuts']) if (!parts.includes(extra)) parts.push(extra)
+    const leftLen = footer.model.length + 3 + footer.cwd.length + (footer.repo ? 3 + footer.repo.length : 0)
+    // Drop the least important hints first until the row fits.
+    while (parts.length > 1 && leftLen + 3 + parts.join(' · ').length > room) parts.pop()
     const hints = parts.join(' · ')
     return (
-      <Box flexDirection="row" flexGrow={1} width={Math.max(40, cols - 24)} justifyContent="space-between">
+      <Box flexDirection="row" flexGrow={1} width={room} justifyContent="space-between">
         <Box flexDirection="row">
           <Text color={MODEL}>{footer.model}</Text>
           <Text color={DIM}> · </Text>
